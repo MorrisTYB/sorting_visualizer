@@ -5,6 +5,7 @@ from tkinter import Button, Canvas, Label, ttk
 from tkinter import Tk
 from tkinter import StringVar
 from tkinter import Frame
+from algorithms.bubble_sort import bubble_sort
 
 
 window = Tk()
@@ -52,11 +53,23 @@ def generate():
 
 
 def set_speed():
-    pass
+    if speed_menu.get() == "Slow":
+        return 0.3
+
+    elif speed_menu.get() == "Medium":
+        return 0.1
+
+    else:
+        return 0.001
 
 
 def sort():
-    pass
+    global data
+    time_tick = set_speed()
+    print(algo_menu.get())
+
+    if algo_menu.get() == "Bubble Sort":
+        bubble_sort(data, draw_data, time_tick)
 
 
 # UI HERE #
