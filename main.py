@@ -6,12 +6,13 @@ from tkinter import Tk
 from tkinter import StringVar
 from tkinter import Frame
 from algorithms.bubble_sort import bubble_sort
+from algorithms.merge_sort import merge_sort
 
 
 window = Tk()
 window.title("Morris' Sorting Algorithims Visualizer")
 window.maxsize(1000, 700)
-window.config(bg=colors.WHITE)
+window.config(bg=colors.DARK_GRAY)
 
 algorithm_name = StringVar()
 algo_list = ["Bubble Sort", "Merge Sort"]
@@ -66,25 +67,27 @@ def set_speed():
 def sort():
     global data
     time_tick = set_speed()
-    print(algo_menu.get())
 
     if algo_menu.get() == "Bubble Sort":
         bubble_sort(data, draw_data, time_tick)
 
+    elif algo_menu.get() == "Merge Sort":
+        merge_sort(data, 0, len(data) - 1, draw_data, time_tick)
+
 
 # UI HERE #
-UI_frame = Frame(window, width=900, height=300, bg=colors.WHITE)
+UI_frame = Frame(window, width=900, height=300, bg=colors.DARK_GRAY)
 UI_frame.grid(row=0, column=0, padx=10, pady=5)
 
 # Select Algo #
-l1 = Label(UI_frame, text="Algorithim: ", bg=colors.WHITE)
+l1 = Label(UI_frame, text="Algorithim: ", bg=colors.DARK_GRAY)
 l1.grid(row=0, column=0, padx=10, pady=5, sticky=W)
 algo_menu = ttk.Combobox(UI_frame, textvariable=algorithm_name, values=algo_list)
 algo_menu.grid(row=0, column=1, padx=10, pady=5, sticky=W)
 algo_menu.current(0)
 
 # dropdown to select sorting speed
-l2 = Label(UI_frame, text="Sorting Speed: ", bg=colors.WHITE)
+l2 = Label(UI_frame, text="Sorting Speed: ", bg=colors.DARK_GRAY)
 l2.grid(row=1, column=0, padx=10, pady=5)
 speed_menu = ttk.Combobox(UI_frame, textvariable=speed_name, values=speed_list)
 speed_menu.grid(row=1, column=1, padx=5, pady=5)
@@ -93,10 +96,10 @@ speed_menu.current(0)
 
 # sort button
 
-b1 = Button(UI_frame, text="Sort", command=sort, bg=colors.LIGHT_GRAY)
+b1 = Button(UI_frame, text="Sort", command=sort, bg=colors.WHITE)
 b1.grid(row=2, column=1, padx=5, pady=5)
 
-b3 = Button(UI_frame, text="Generate Array", command=generate, bg=colors.LIGHT_GRAY)
+b3 = Button(UI_frame, text="Generate Array", command=generate, bg=colors.WHITE)
 b3.grid(row=2, column=0, padx=5, pady=5)
 
 # Canvas to draw array
